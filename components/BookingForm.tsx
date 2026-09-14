@@ -21,6 +21,28 @@ export default function BookingForm({ handymanId, categories, availability }: Pr
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null)
+  const [locating, setLocating] = useState(false)
+  const [locationError, setLocationError] = useState<string | null>(null)
+
+  function shareLocation() {
+    if (!navigator.geolocation) {
+      setLocationError('Location is not supported on this browser.')
+      return
+    }
+    setLocating(true)
+    setLocationError(null)
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+        setLocating(false)
+      },
+      () => {
+        setLocationError('Could not get your location. You can still book without it.')
+        setLocating(false)
+      }
+    )
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -44,6 +66,8 @@ export default function BookingForm({ handymanId, categories, availability }: Pr
       locality,
       scheduled_time_slot: slotLabel || null,
       status: 'pending',
+      latitude: coords?.lat ?? null,
+      longitude: coords?.lng ?? null,
     })
 
     if (insertError) {
@@ -105,6 +129,18 @@ export default function BookingForm({ handymanId, categories, availability }: Pr
           onChange={(e) => setLocality(e.target.value)}
           className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
         />
+      </div>
+
+      <div>
+        <button
+          type="button"
+          onClick={shareLocation}
+          disabled={locating}
+          className="text-sm border border-[var(--border-hairline)] rounded-sm px-3 py-1.5 disabled:opacity-50"
+        >
+          {locating ? 'Getting location...' : coords ? 'Location shared' : 'Share my exact location (optional)'}
+        </button>
+        {locationError && <p className="text-sm text-[var(--danger)] mt-1">{locationError}</p>}
       </div>
 
       <div>

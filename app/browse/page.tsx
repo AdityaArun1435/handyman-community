@@ -124,12 +124,21 @@ export default async function BrowsePage({
           return (
             <div key={h.profile_id} className="py-5 flex flex-col gap-2">
               <div className="flex justify-between items-start">
-                <Link
-                  href={"/handyman/" + h.profile_id}
-                  className="font-display font-semibold text-lg hover:underline"
-                >
-                  {h.profiles?.full_name ?? 'Unnamed'}
-                </Link>
+                <div className="flex items-center gap-3">
+                  {(h.profiles as any)?.photo_url && (
+                    <img
+                      src={(h.profiles as any).photo_url}
+                      alt=""
+                      className="w-12 h-12 rounded-full object-cover border border-[var(--border-hairline)]"
+                    />
+                  )}
+                  <Link
+                    href={"/handyman/" + h.profile_id}
+                    className="font-display font-semibold text-lg hover:underline"
+                  >
+                    {h.profiles?.full_name ?? 'Unnamed'}
+                  </Link>
+                </div>
                 <div className="text-right text-sm text-[var(--muted)]">
                   {h.years_experience != null && <div>{h.years_experience} yrs experience</div>}
                   {rating && <div>{rating.avg.toFixed(1)} stars ({rating.count})</div>}

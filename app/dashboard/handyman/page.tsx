@@ -32,7 +32,12 @@ export default async function HandymanDashboardPage() {
 
   return (
     <div className="max-w-2xl mx-auto py-10 px-4">
-      <h1 className="font-display text-2xl font-semibold mb-6">My Dashboard</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="font-display text-2xl font-semibold">My Dashboard</h1>
+        <a href="/dashboard/handyman/edit" className="text-sm underline">
+          Edit profile
+        </a>
+      </div>
 
       <h2 className="font-display text-lg font-semibold mb-3">Bookings</h2>
       {(!bookings || bookings.length === 0) && (
@@ -52,6 +57,15 @@ export default async function HandymanDashboardPage() {
                 )}
                 {(b as any).profiles?.phone && (
                   <p className="text-sm text-[var(--muted)]">Phone: {(b as any).profiles.phone}</p>
+                )}
+                {b.latitude != null && b.longitude != null && (
+                  <a
+                    href={"https://www.google.com/maps?q=" + b.latitude + "," + b.longitude}
+                    target="_blank"
+                    className="text-sm underline text-[var(--accent)]"
+                  >
+                    View exact location on map
+                  </a>
                 )}
               </div>
               <span className="text-xs uppercase tracking-wide border border-[var(--border-hairline)] px-2 py-1 rounded-sm">

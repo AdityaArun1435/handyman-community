@@ -57,9 +57,18 @@ export default async function HandymanProfilePage({
 
   return (
     <div className="max-w-2xl mx-auto py-10 px-4">
-      <h1 className="font-display text-3xl font-semibold">
-        {details.profiles?.full_name}
-      </h1>
+      <div className="flex items-center gap-4">
+        {(details.profiles as any)?.photo_url && (
+          <img
+            src={(details.profiles as any).photo_url}
+            alt=""
+            className="w-20 h-20 rounded-full object-cover border border-[var(--border-hairline)]"
+          />
+        )}
+        <h1 className="font-display text-3xl font-semibold">
+          {details.profiles?.full_name}
+        </h1>
+      </div>
 
       <div className="flex flex-wrap gap-1.5 mt-3">
         {details.categories.map((cat: string) => (
