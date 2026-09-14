@@ -106,8 +106,8 @@ export default function HandymanRegisterPage() {
 
   return (
     <div className="max-w-xl mx-auto py-10 px-4">
-      <h1 className="text-2xl font-semibold mb-2">Register as a Handyman</h1>
-      <p className="text-gray-600 mb-6">
+      <h1 className="font-display text-2xl font-semibold mb-2">Register as a Handyman</h1>
+      <p className="text-[var(--muted)] mb-6">
         List your services so ECR residents can find and book you directly.
       </p>
 
@@ -119,7 +119,7 @@ export default function HandymanRegisterPage() {
             required
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="w-full border rounded-md px-3 py-2"
+            className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
           />
         </div>
 
@@ -131,7 +131,7 @@ export default function HandymanRegisterPage() {
               required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full border rounded-md px-3 py-2"
+              className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
             />
           </div>
           <div>
@@ -140,7 +140,7 @@ export default function HandymanRegisterPage() {
               type="tel"
               value={whatsapp}
               onChange={(e) => setWhatsapp(e.target.value)}
-              className="w-full border rounded-md px-3 py-2"
+              className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
             />
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function HandymanRegisterPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border rounded-md px-3 py-2"
+              className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
             />
           </div>
           <div>
@@ -164,7 +164,7 @@ export default function HandymanRegisterPage() {
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border rounded-md px-3 py-2"
+              className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
             />
           </div>
         </div>
@@ -177,10 +177,10 @@ export default function HandymanRegisterPage() {
                 type="button"
                 key={cat}
                 onClick={() => toggleCategory(cat)}
-                className={`px-3 py-1.5 rounded-full border text-sm ${
+                className={`px-3 py-1.5 rounded-sm border text-sm ${
                   categories.includes(cat)
-                    ? 'bg-black text-white border-black'
-                    : 'bg-white text-gray-700 border-gray-300'
+                    ? 'bg-[var(--foreground)] text-white border-[var(--foreground)]'
+                    : 'bg-white text-[var(--foreground)] border-[var(--border-hairline)]'
                 }`}
               >
                 {cat}
@@ -199,7 +199,7 @@ export default function HandymanRegisterPage() {
             placeholder="e.g. Neelankarai, Injambakkam, Thiruvanmiyur"
             value={localities}
             onChange={(e) => setLocalities(e.target.value)}
-            className="w-full border rounded-md px-3 py-2"
+            className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
           />
         </div>
 
@@ -212,7 +212,7 @@ export default function HandymanRegisterPage() {
             min={0}
             value={yearsExperience}
             onChange={(e) => setYearsExperience(e.target.value)}
-            className="w-full border rounded-md px-3 py-2"
+            className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
           />
         </div>
 
@@ -222,16 +222,16 @@ export default function HandymanRegisterPage() {
             rows={3}
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="w-full border rounded-md px-3 py-2"
+            className="w-full border border-[var(--border-hairline)] rounded-sm px-3 py-2 bg-white"
           />
         </div>
 
-        {error && <p className="text-red-600 text-sm">{error}</p>}
+        {error && <p className="text-[var(--danger)] text-sm">{error}</p>}
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-black text-white rounded-md py-2.5 font-medium disabled:opacity-50"
+          className="w-full bg-[var(--accent)] text-white rounded-sm py-2.5 font-medium disabled:opacity-50"
         >
           {loading ? 'Registering...' : 'Register'}
         </button>
