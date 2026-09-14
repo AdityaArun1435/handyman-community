@@ -27,6 +27,7 @@ export default async function Navbar() {
 
         <nav className="flex items-center gap-5 text-sm">
           <Link href="/browse">Find help</Link>
+          <Link href="/community">Community</Link>
 
           {profile ? (
             <>
